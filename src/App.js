@@ -11,7 +11,8 @@ export default class App extends Component {
     super(props);
     this.state = {
       users: [],
-      loading: false
+      loading: false,
+      alert: null
     };
   }
   // async componentDidMount() {
@@ -34,6 +35,10 @@ export default class App extends Component {
 
   clearUsers = () => this.setState({users: [], loading: false});
 
+  setAlert = (msg, type) => {
+    this.setState({alert: {msg, type}});
+  }
+
   render() {
     const { users, loading } = this.state;
     return (
@@ -43,7 +48,8 @@ export default class App extends Component {
           <Search 
             searchUsers={this.searchUsers} 
             clearUsers={this.clearUsers} 
-            showClear={!!this.state.users.length}/>
+            showClear={!!this.state.users.length}
+            setAlert={this.setAlert} />
           <Users loading={loading} users={users}/>
         </div>
       </div>
